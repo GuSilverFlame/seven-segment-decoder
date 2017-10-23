@@ -38,7 +38,7 @@ BEGIN
 	not_exp_1: not1 PORT MAP(input(1), nin(1));
 	not_exp_0: not1 PORT MAP(input(0), nin(0));
 
-    and_exp_1: and2 PORT MAP(input(2), input(0), x_z);
+        and_exp_1: and2 PORT MAP(input(2), input(0), x_z);
 	and_exp_2: and2 PORT MAP(nin(2), nin(0), nx_nz);
 	and_exp_3: and2 PORT MAP(nin(1), nin(0), ny_nz);
 	and_exp_4: and2 PORT MAP(input(1), input(0), y_z);
