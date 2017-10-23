@@ -1,14 +1,11 @@
 ENTITY seven_segment_decoder IS
-	
 	PORT(
 		input: IN BIT_VECTOR(3 DOWNTO 0); 
 		output: OUT BIT_VECTOR(6 DOWNTO 0)
 	);
-	
 END seven_segment_decoder;
 
 ARCHITECTURE structural OF seven_segment_decoder IS 
-
 	COMPONENT and2 PORT(in_a, in_b: IN BIT; output: OUT BIT); END COMPONENT;
 	COMPONENT and3 PORT(in_a, in_b, in_c: IN BIT; output: OUT BIT); END COMPONENT;
 	COMPONENT not1 PORT(input: IN BIT; output: OUT BIT); END COMPONENT;
@@ -36,15 +33,12 @@ ARCHITECTURE structural OF seven_segment_decoder IS
 		x_ny,
 		x_nz: BIT;
 BEGIN
-
-	-- not expressions
 	not_exp_3: not1 PORT MAP(input(3), nin(3));
 	not_exp_2: not1 PORT MAP(input(2), nin(2));
 	not_exp_1: not1 PORT MAP(input(1), nin(1));
 	not_exp_0: not1 PORT MAP(input(0), nin(0));
 
-	-- and expressions
-	and_exp_1: and2 PORT MAP(input(2), input(0), x_z);
+    and_exp_1: and2 PORT MAP(input(2), input(0), x_z);
 	and_exp_2: and2 PORT MAP(nin(2), nin(0), nx_nz);
 	and_exp_3: and2 PORT MAP(nin(1), nin(0), ny_nz);
 	and_exp_4: and2 PORT MAP(input(1), input(0), y_z);
@@ -54,7 +48,6 @@ BEGIN
 	and_exp_8: and2 PORT MAP(input(2), nin(1), x_ny);
 	and_exp_9: and2 PORT MAP(input(2), nin(0), x_nz);	
 	
-	-- outputs(or expressions)
 	a: or4 PORT MAP(input(3), input(1), x_z, nx_nz, output(6));
 	b: or3 PORT MAP(nin(2), ny_nz, y_z, output(5));
 	c: or3 PORT MAP(input(2), nin(1), input(0), output(4));
@@ -62,5 +55,4 @@ BEGIN
 	e: or2 PORT MAP(nx_nz, y_nz, output(2));
 	f: or4 PORT MAP(input(3), ny_nz, x_ny, x_nz, output(1));
 	g: or4 PORT MAP(input(3), x_ny, nx_y, y_nz, output(0));
-
 END structural;
